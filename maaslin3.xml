@@ -1,0 +1,38 @@
+<tool id="maaslin3" name="MaAsLin3" version="0.1.0" python_template_version="3.5">
+    <requirements>
+    </requirements>
+    <command detect_errors="exit_code"><![CDATA[
+        mkdir maaslin_output &&  
+        Rscript '/export/galaxy-central/tools/maaslin3/R/maaslin3.R' 
+        $taxonomy
+        $metadata
+        maaslin_output  &&
+        cp maaslin_output/all_results.tsv  $output1 &&
+        cp maaslin_output/significant_results.tsv  $output2 &&
+        cp maaslin_output/summary_plot.pdf $output3
+            ]]></command>
+    <inputs>
+        <param type="data" name="taxonomy"  label="Input Taxonomy" format="tsv"  />
+        <param type="data" name="metadata"  label="Input Metadata" format="tsv"  />
+ 
+
+    </inputs>
+    <outputs>
+        <data name="output1"  format="tsv" label="all results" />
+        <data name="output2"  format="tsv" label="significant results" />
+        <data name="output3"  format="pdf" label="Summary Plot" />
+    </outputs>
+    <help><![CDATA[
+
+    MaAsLin 3 is the next generation of MaAsLin (Microbiome Multivariable Associations with Linear Models).
+
+    This comprehensive R package efficiently determines multivariable associations between clinical metadata and microbial meta-omics features. 
+    
+    Relative to MaAsLin 2,  MaAsLin 3 introduces the ability to quantify and test for both abundance and prevalence associations while accounting for compositionality.
+    
+    By incorporating generalized linear models, MaAsLin 3 accomodates most modern epidemiological study designs including cross-sectional and longitudinal studies.
+
+
+ 
+    ]]></help>
+</tool>
