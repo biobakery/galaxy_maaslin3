@@ -2,7 +2,11 @@
     <requirements>
     </requirements>
     <command detect_errors="exit_code"><![CDATA[
+        rm -rf /tmp/tmp.maaslin3_output &&
+        rm -f  /tmp/tmp.maaslin3_taxonomy.tsv &&
+        rm -f /tmp/tmp.maaslin3_metadata.tsv &&
         mkdir /tmp/tmp.maaslin3_output &&
+        rm -f /tmp/tmp.maaslin3_Results.zip &&
         cp $taxonomy /tmp/tmp.maaslin3_taxonomy.tsv &&
         cp $metadata /tmp/tmp.maaslin3_metadata.tsv &&
         Rscript '/export/galaxy-central/tools/maaslin3/R/maaslin3.R'
@@ -15,18 +19,46 @@
         cp /tmp/tmp.maaslin3_output/all_results.tsv  $output1 &&
         cp /tmp/tmp.maaslin3_output/significant_results.tsv  $output2 &&
         cp /tmp/tmp.maaslin3_output/figures/summary_plot.pdf $output3 &&
-        rm -r /tmp/tmp.maaslin3_output &&
-        rm /tmp/tmp.maaslin3_taxonomy.tsv &&
-        rm /tmp/tmp.maaslin3_metadata.tsv
+        zip -r  /tmp/tmp.maaslin3_Results.zip  /tmp/tmp.maaslin3_output &&
+        cp /tmp/tmp.maaslin3_Results.zip $output4 &&
+        rm -rf /tmp/tmp.maaslin3_output &&
+        rm -f  /tmp/tmp.maaslin3_taxonomy.tsv &&
+        rm -f /tmp/tmp.maaslin3_metadata.tsv &&
+        rm -f /tmp/tmp.maaslin3_Results.zip
             ]]></command>
     <inputs>
         <param type="data" name="taxonomy"  label="Input Taxonomy" format="tsv"  />
         <param type="data" name="metadata"  label="Input Metadata" format="tsv"  />
+
+
+        <conditional name="gchoice_additional_analysis_types">
+        	<param name="global_additional_analysis_types" type="select" label="Advanced parameters"  multiple="False" help="Select advanced choices ">
+        		<option value="0" selected='True'>No</option>
+				<option value="1">Yes</option>
+        	</param>
+           	<when value="0">
+ 				 
+			</when>
+
+        	<when value="1">
+				 
+				<param name="random_effects" label="random_effects: The random effects for the model, comma-delimited for multiple effects [ Default: none ]"  value=" " type="text" format="text"/>
+				<param name="group_effects" label="group_effects: The group effects for the model, comma-delimited for multiple effects[ Default: none ] "  value=" " type="text" format="text"/>
+
+			</when>
+    	</conditional>
+
+        <param name="formula1" label="formula: For sample use: '~ diagnosis + dysbiosis_state + antibiotics + age + reads' "  value="" type="text" format="text"/>
+        <param name="reference1" label="reference: For sample use: 'diagnosis,nonIBD;dysbiosis_state,none;antibiotics,No' "  value="diagnosis,nonIBD;dysbiosis_state,none;antibiotics,No" type="text" format="text"/>
+
+
+
     </inputs>
     <outputs>
         <data name="output1"  format="tsv" label="all results" />
         <data name="output2"  format="tsv" label="significant results" />
         <data name="output3"  format="pdf" label="Summary Plot" />
+        <data name="output4"  format="zip" label="MaAsLin Output zip results - please download" />
     </outputs>
     <help><![CDATA[
 
