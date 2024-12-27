@@ -1,7 +1,16 @@
 <tool id="maaslin3" name="MaAsLin3" version="0.1.0" python_template_version="3.5">
     <requirements>
     </requirements>
+ 
+
+
     <command detect_errors="exit_code"><![CDATA[
+        #set $for1 = "'~" +$str($formula1)  + "'"  
+        #set $ref0 = "'" +$str($reference1)  + "'"  
+        #set $ref1 = $ref0.replace('X', ';')
+
+
+        
         rm -rf /tmp/tmp.maaslin3_output &&
         rm -f  /tmp/tmp.maaslin3_taxonomy.tsv &&
         rm -f /tmp/tmp.maaslin3_metadata.tsv &&
@@ -13,14 +22,26 @@
         /tmp/tmp.maaslin3_taxonomy.tsv
         /tmp/tmp.maaslin3_metadata.tsv
         /tmp/tmp.maaslin3_output
-        --formula='~ diagnosis + dysbiosis_state + antibiotics + age + reads'
-        --reference='diagnosis,nonIBD;dysbiosis_state,none;antibiotics,No'
+        --formula=$for1
+        --reference=$ref1
 
         #if $str($gchoice_additional_analysis_types.global_additional_analysis_types)  == "1":
-			--random_effects $gchoice_additional_analysis_types.random_effects
-            --group_effects $gchoice_additional_analysis_types.group_effects
-            --ordered_effects $gchoice_additional_analysis_types.ordered_effects
-            --strata_effects $gchoice_additional_analysis_types.strata_effects
+			#if $str($gchoice_additional_analysis_types.random_effects)  != "None":
+                --random_effects $gchoice_additional_analysis_types.random_effects
+			#end if	
+
+			#if $str($gchoice_additional_analysis_types.group_effects)  != "None":
+                --group_effects $gchoice_additional_analysis_types.group_effects
+			#end if	
+
+			#if $str($gchoice_additional_analysis_types.ordered_effects)  != "None":
+                --ordered_effects $gchoice_additional_analysis_types.ordered_effects
+			#end if	
+
+			#if $str($gchoice_additional_analysis_types.strata_effects)  != "None":
+                --strata_effects $gchoice_additional_analysis_types.strata_effects 
+			#end if	
+ 
 		#end if
 
 
@@ -59,9 +80,9 @@
 
 			</when>
     	</conditional>
-
-        <param name="formula1" label="formula: For sample use: '~ diagnosis + dysbiosis_state + antibiotics + age + reads' "  value="" type="text" format="text"/>
-        <param name="reference1" label="reference: For sample use: 'diagnosis,nonIBD;dysbiosis_state,none;antibiotics,No' "  value="diagnosis,nonIBD;dysbiosis_state,none;antibiotics,No" type="text" format="text"/>
+ 
+        <param name="formula1" label="formula: For sample use:  diagnosis + dysbiosis_state + antibiotics + age + reads (Galaxy provides the ~)"  value="" type="text" format="text"/>
+        <param name="reference1" label="reference: For sample use: diagnosis,nonIBD;dysbiosis_state,none;antibiotics,No "  value="" type="text" format="text"/>
 
 
 
