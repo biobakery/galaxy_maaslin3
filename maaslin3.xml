@@ -35,8 +35,8 @@
         rm -f /tmp/tmp.maaslin3_Results.zip
             ]]></command>
     <inputs>
-        <param type="data" name="taxonomy"  label="Input Taxonomy" format="tsv"  />
-        <param type="data" name="metadata"  label="Input Metadata" format="tsv"  />
+        <param type="data" name="taxonomy"  label="Input Taxonomy" format="maaslin3_taxonomy_input"  />
+        <param type="data" name="metadata"  label="Input Metadata" format="maaslin3_metadata_input"  />
 
 
         <conditional name="gchoice_additional_analysis_types">
@@ -77,6 +77,7 @@
     Relative to MaAsLin 2,  MaAsLin 3 introduces the ability to quantify and test for both abundance and prevalence associations while accounting for compositionality.
 
     By incorporating generalized linear models, MaAsLin 3 accomodates most modern epidemiological study designs including cross-sectional and longitudinal studies.
+
 
 
 
