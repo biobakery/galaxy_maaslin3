@@ -19,6 +19,8 @@
         #if $str($gchoice_additional_analysis_types.global_additional_analysis_types)  == "1":
 			--random_effects $gchoice_additional_analysis_types.random_effects
             --group_effects $gchoice_additional_analysis_types.group_effects
+            --ordered_effects $gchoice_additional_analysis_types.ordered_effects
+            --strata_effects $gchoice_additional_analysis_types.strata_effects
 		#end if
 
 
@@ -52,6 +54,8 @@
 				 
 				<param name="random_effects" label="random_effects: The random effects for the model, comma-delimited for multiple effects [ Default: none ]"  value="None" type="text" format="text"/>
 				<param name="group_effects" label="group_effects: The group effects for the model, comma-delimited for multiple effects[ Default: none ] "  value="None" type="text" format="text"/>
+				<param name="ordered_effects" label="The ordered effects for the model, comma-delimited for multiple effects [ Default: none ] "  value="None" type="text" format="text"/>
+                <param name="strata_effects" label="The strata effects for the model. Only one is allowed. [ Default: none ] "  value="None" type="text" format="text"/>
 
 			</when>
     	</conditional>
@@ -77,7 +81,6 @@
     Relative to MaAsLin 2,  MaAsLin 3 introduces the ability to quantify and test for both abundance and prevalence associations while accounting for compositionality.
 
     By incorporating generalized linear models, MaAsLin 3 accomodates most modern epidemiological study designs including cross-sectional and longitudinal studies.
-
 
 
 
