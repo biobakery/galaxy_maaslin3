@@ -5,7 +5,9 @@
 
 
     <command detect_errors="exit_code"><![CDATA[
-       
+ 
+
+
         
         rm -rf /tmp/tmp.maaslin3_output &&
         rm -f  /tmp/tmp.maaslin3_taxonomy.tsv &&
@@ -54,8 +56,8 @@
         rm -f /tmp/tmp.maaslin3_Results.zip
             ]]></command>
     <inputs>
-        <param type="data" name="taxonomy"  label="Input Taxonomy" format="maaslin3_taxonomy_input"  />
-        <param type="data" name="metadata"  label="Input Metadata" format="maaslin3_metadata_input"  />
+        <param type="data" name="taxonomy"  label="Input Taxonomy:  Use DataType 'maaslin3_taxonomy_input' when you upload this file" format="maaslin3_taxonomy_input"  />
+        <param type="data" name="metadata"  label="Input Metadata : Use DataType 'maaslin3_metadata_input' when you upload" format="maaslin3_metadata_input"  />
 
 
         <conditional name="gchoice_additional_analysis_types">
@@ -77,7 +79,7 @@
 			</when>
     	</conditional>
  
-        <param name="formula1" type="text" label="formula: For sample use:  '~ diagnosis + dysbiosis_state + antibiotics + age + reads'" value="">
+        <param name="formula1" type="text" label="formula: For sample use:  '~ diagnosis + dysbiosis_state + antibiotics + age + reads'" value="'~ diagnosis + dysbiosis_state + antibiotics + age + reads'">
             <sanitizer  >
                 <valid initial="string.printable">
                 </valid>
@@ -85,13 +87,12 @@
         </param>
 
 
-        <param name="reference1" type="text" label="formula: For sample use:  'diagnosis,nonIBD;dysbiosis_state,none;antibiotics,No'" value="">
+        <param name="reference1" type="text" label="formula: For sample use:  'diagnosis,nonIBD;dysbiosis_state,none;antibiotics,No'" value="'diagnosis,nonIBD;dysbiosis_state,none;antibiotics,No'">
             <sanitizer >
                 <valid initial="string.printable">
                 </valid>
             </sanitizer>
         </param>
-
 
 
     </inputs>
@@ -103,15 +104,70 @@
     </outputs>
     <help><![CDATA[
 
-    MaAsLin 3 is the next generation of MaAsLin (Microbiome Multivariable Associations with Linear Models).
+MaAsLin 3 is the next generation of MaAsLin (Microbiome Multivariable Associations with Linear Models).
 
-    This comprehensive R package efficiently determines multivariable associations between clinical metadata and microbial meta-omics features.
+* This comprehensive R package efficiently determines multivariable associations between clinical metadata and microbial meta-omics features.
 
-    Relative to MaAsLin 2,  MaAsLin 3 introduces the ability to quantify and test for both abundance and prevalence associations while accounting for compositionality.
+* Relative to MaAsLin 2,  MaAsLin 3 introduces the ability to quantify and test for both abundance and prevalence associations while accounting for compositionality.
 
-    By incorporating generalized linear models, MaAsLin 3 accomodates most modern epidemiological study designs including cross-sectional and longitudinal studies.
+* By incorporating generalized linear models, MaAsLin 3 accomodates most modern epidemiological study designs including cross-sectional and longitudinal studies.
 
 
+
+**Inputs**
+==========
+
+
+MaAslin requires two inputs which are described here:  Inputs_Description_ 
+
+
+* Taxonomy file: Possible features include taxonomy or genes. These can be relative abundances or counts.
+
+    Sample for this file can be found in  MaAslin3_Sample_Taxonomy_ .
+    
+    Please upload with datatype of "maaslin3_taxonomy_input"
+
+* Metadata file: Formatted with variables as columns and samples as rows. Possible metadata include gender or age
+
+    Sample for this file can be found in  MaAslin3_Sample_Metadata_ .
+     
+    Please upload with datatype of "maaslin3_metadata_input"
+
+
+
+
+**Outputs**
+===========
+
+* MaAsLin files explained in detail in MaAsLin3_Outputs_Description_ 
+ 
+
+ ..  _MaAsLin3_Outputs_Description:  http://github.com/biobakery/maaslin3?tab=readme-ov-file#output-files
+ ..  _the_manuscript: http://doi.org/10.1101/2024.12.13.628459
+ ..  _MaAsLin3_Tutorial: http://github.com/biobakery/maaslin3
+ ..  _MaAslin3_Sample_Taxonomy:  http://github.com/biobakery/galaxy_maaslin3/blob/main/sample_data/HMP2_taxonomy.tsv
+ ..  _MaAslin3_Sample_Metadata:  http://github.com/biobakery/galaxy_maaslin3/blob/main/sample_data/HMP2_metadata.tsv
+ ..  _Inputs_Description: http://github.com/biobakery/maaslin3?tab=readme-ov-file#input-data
+ 
+ 
+
+
+
+**User Manual**
+===================================
+
+
+You can find the following resources:
+
+-  MaAsLin3_Tutorial_
+ 
+
+
+If you use the MaAsLin 3 software, please cite the_manuscript_ :
+
+William A. Nickols, Thomas Kuntz, Jiaxian Shen, Sagun Maharjan, Himel Mallick, Eric A. Franzosa, Kelsey N. Thompson, Jacob T. Nearing, Curtis Huttenhower. 
+
+MaAsLin 3: Refining and extending generalized multivariable linear models for meta-omic association discovery. bioRxiv 2024.12.13.628459; doi: https://doi.org/10.1101/2024.12.13.628459
 
     ]]></help>
 </tool>
