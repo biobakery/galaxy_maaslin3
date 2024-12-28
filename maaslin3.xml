@@ -78,7 +78,7 @@
     	</conditional>
  
         <param name="formula1" type="text" label="formula: For sample use:  '~ diagnosis + dysbiosis_state + antibiotics + age + reads'" value="">
-            <sanitizer invalid_char="">
+            <sanitizer  >
                 <valid initial="string.printable">
                 </valid>
             </sanitizer>
@@ -86,7 +86,7 @@
 
 
         <param name="reference1" type="text" label="formula: For sample use:  'diagnosis,nonIBD;dysbiosis_state,none;antibiotics,No'" value="">
-            <sanitizer invalid_char="">
+            <sanitizer >
                 <valid initial="string.printable">
                 </valid>
             </sanitizer>
