@@ -5,11 +5,7 @@
 
 
     <command detect_errors="exit_code"><![CDATA[
-        #set $for1 = "'~" +$str($formula1)  + "'"  
-        #set $ref0 = "'" +$str($reference1)  + "'"  
-        #set $ref1 = $ref0.replace('X', ';')
-
-
+       
         
         rm -rf /tmp/tmp.maaslin3_output &&
         rm -f  /tmp/tmp.maaslin3_taxonomy.tsv &&
@@ -22,8 +18,8 @@
         /tmp/tmp.maaslin3_taxonomy.tsv
         /tmp/tmp.maaslin3_metadata.tsv
         /tmp/tmp.maaslin3_output
-        --formula=$for1
-        --reference=$ref1
+        --formula=$formula1
+        --reference=$reference1
 
         #if $str($gchoice_additional_analysis_types.global_additional_analysis_types)  == "1":
 			#if $str($gchoice_additional_analysis_types.random_effects)  != "None":
@@ -81,8 +77,20 @@
 			</when>
     	</conditional>
  
-        <param name="formula1" label="formula: For sample use:  diagnosis + dysbiosis_state + antibiotics + age + reads (Galaxy provides the ~)"  value="" type="text" format="text"/>
-        <param name="reference1" label="reference: For sample use: diagnosis,nonIBD;dysbiosis_state,none;antibiotics,No "  value="" type="text" format="text"/>
+        <param name="formula1" type="text" label="formula: For sample use:  '~ diagnosis + dysbiosis_state + antibiotics + age + reads'" value="">
+            <sanitizer invalid_char="">
+                <valid initial="string.printable">
+                </valid>
+            </sanitizer>
+        </param>
+
+
+        <param name="reference1" type="text" label="formula: For sample use:  'diagnosis,nonIBD;dysbiosis_state,none;antibiotics,No'" value="">
+            <sanitizer invalid_char="">
+                <valid initial="string.printable">
+                </valid>
+            </sanitizer>
+        </param>
 
 
 
