@@ -45,6 +45,7 @@
 
 
         &&
+        cp /tmp/tmp.maaslin3_output/maaslin3.log $output0 &&
         cp /tmp/tmp.maaslin3_output/all_results.tsv  $output1 &&
         cp /tmp/tmp.maaslin3_output/significant_results.tsv  $output2 &&
         cp /tmp/tmp.maaslin3_output/figures/summary_plot.pdf $output3 &&
@@ -97,6 +98,7 @@
 
     </inputs>
     <outputs>
+        <data name="output0"  format="txt" label="maaslin3 log" />
         <data name="output1"  format="tsv" label="all results" />
         <data name="output2"  format="tsv" label="significant results" />
         <data name="output3"  format="pdf" label="Summary Plot" />
