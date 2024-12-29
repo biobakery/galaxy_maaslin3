@@ -48,7 +48,29 @@
     		#end if	
 		#end if
 
+        #if $str($gchoice_additional_abundance_options.global_additional_abundance)  == "1":
+			#if  float($gchoice_additional_abundance_options.min_prevalence) > 0:
+				--min_prevalence  $gchoice_additional_abundance_options.min_prevalence
+    		#end if	
+		#end if
 
+       #if $str($gchoice_additional_abundance_options.global_additional_abundance)  == "1":
+			#if  float($gchoice_additional_abundance_options.zero_threshold) > 0:
+				--zero-threshold  $gchoice_additional_abundance_options.zero_threshold
+    		#end if	
+		#end if
+
+        #if $str($gchoice_additional_abundance_options.global_additional_abundance)  == "1":
+			#if  float($gchoice_additional_abundance_options.min_variance) > 0:
+				--min_variance  $gchoice_additional_abundance_options.min_variance
+    		#end if	
+		#end if
+
+        #if $str($gchoice_additional_abundance_options.global_additional_abundance)  == "1":
+			#if  float($gchoice_additional_abundance_options.max_significance) != 0.1:
+				--max_significance  $gchoice_additional_abundance_options.max_significance
+    		#end if	
+		#end if
 
 
         &&
@@ -115,8 +137,11 @@
 
         	<when value="1">
 
-			        <param name="min_abundance" type="float"  value="0"  label=" The minimum abundance for each feature "/>
-
+			        <param name="min_abundance" type="float"  value="0"  label=" min_abundance: The minimum abundance for each feature "/>
+			        <param name="min_prevalence" type="float"  value="0"  label=" min_prevalence:  The minimum proportion of samples for which a feature is detected at minimum abundance "/>
+			        <param name="zero_threshold" type="float"  value="0"  label=" zero_threshold: The minimum abundance to be considered non-zero "/>
+			        <param name="min_variance" type="float"  value="0"  label=" Kmin_variance: Keep features with variances greater than value "/>
+                    <param name="max_significance" type="float"  value="0.1"  label=" max_significance:  The q-value threshold for significance "/>
 			</when>
     	</conditional>
  
