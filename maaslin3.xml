@@ -72,6 +72,19 @@
     		#end if	
 		#end if
 
+        #if $str($gchoice_additional_abundance_options.global_additional_abundance)  == "1":
+			#if  str($gchoice_additional_abundance_options.transform) != "LOG":
+				--transform  $gchoice_additional_abundance_options.transform
+    		#end if	
+		#end if
+
+
+        #if $str($gchoice_additional_abundance_options.global_additional_abundance)  == "1":
+			#if  str($gchoice_additional_abundance_options.normalization) != "TSS":
+				--normalization  $gchoice_additional_abundance_options.normalization
+    		#end if	
+		#end if
+
 
         &&
         cp /tmp/tmp.maaslin3_output/maaslin3.log $output0 &&
@@ -88,6 +101,23 @@
     <inputs>
         <param type="data" name="taxonomy"  label="Input Taxonomy:  Use DataType 'maaslin3_taxonomy_input' when you upload this file" format="maaslin3_taxonomy_input"  />
         <param type="data" name="metadata"  label="Input Metadata : Use DataType 'maaslin3_metadata_input' when you upload" format="maaslin3_metadata_input"  />
+
+        <param name="formula1" type="text" label="formula: For sample use:  '~ diagnosis + dysbiosis_state + antibiotics + age + reads'" value="'~ diagnosis + dysbiosis_state + antibiotics + age + reads'">
+            <sanitizer  >
+                <valid initial="string.printable">
+                </valid>
+            </sanitizer>
+        </param>
+
+
+        <param name="reference1" type="text" label="formula: For sample use:  'diagnosis,nonIBD;dysbiosis_state,none;antibiotics,No'" value="'diagnosis,nonIBD;dysbiosis_state,none;antibiotics,No'">
+            <sanitizer >
+                <valid initial="string.printable">
+                </valid>
+            </sanitizer>
+        </param>
+
+
 
 
         <conditional name="gchoice_additional_analysis_types">
@@ -109,21 +139,7 @@
 			</when>
     	</conditional>
  
-        <param name="formula1" type="text" label="formula: For sample use:  '~ diagnosis + dysbiosis_state + antibiotics + age + reads'" value="'~ diagnosis + dysbiosis_state + antibiotics + age + reads'">
-            <sanitizer  >
-                <valid initial="string.printable">
-                </valid>
-            </sanitizer>
-        </param>
-
-
-        <param name="reference1" type="text" label="formula: For sample use:  'diagnosis,nonIBD;dysbiosis_state,none;antibiotics,No'" value="'diagnosis,nonIBD;dysbiosis_state,none;antibiotics,No'">
-            <sanitizer >
-                <valid initial="string.printable">
-                </valid>
-            </sanitizer>
-        </param>
-
+      
 
 
         <conditional name="gchoice_additional_abundance_options">
@@ -140,8 +156,23 @@
 			        <param name="min_abundance" type="float"  value="0"  label=" min_abundance: The minimum abundance for each feature "/>
 			        <param name="min_prevalence" type="float"  value="0"  label=" min_prevalence:  The minimum proportion of samples for which a feature is detected at minimum abundance "/>
 			        <param name="zero_threshold" type="float"  value="0"  label=" zero_threshold: The minimum abundance to be considered non-zero "/>
-			        <param name="min_variance" type="float"  value="0"  label=" Kmin_variance: Keep features with variances greater than value "/>
+			        <param name="min_variance" type="float"  value="0"  label=" min_variance: Keep features with variances greater than value "/>
                     <param name="max_significance" type="float"  value="0.1"  label=" max_significance:  The q-value threshold for significance "/>
+                    <param name="normalization" type="select" value="TSS" format="text" >
+                        <label>The normalization method to apply </label>
+                            <option value="TSS">TSS</option>
+                            <option value="CLR">CLR</option>
+                            <option value="CSS">CSS</option>
+                            <option value="NONE">NONE</option>
+                            <option value="TMM">TMM</option>
+                    </param>
+                    <param name="transform" type="select" value="LOG" format="text" >
+                            <label>The transform method to apply </label>
+                                    <option value="LOG">LOG</option>
+                                    <option value="PLOG">LOGIT</option>
+                                    <option value="NONE">NONE</option>
+                    </param>
+
 			</when>
     	</conditional>
  
