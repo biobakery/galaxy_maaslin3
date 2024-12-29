@@ -42,6 +42,13 @@
  
 		#end if
 
+        #if $str($gchoice_additional_abundance_options.global_additional_abundance)  == "1":
+			#if  float($gchoice_additional_abundance_options.min_abundance) > 0:
+				--min_abundance  $gchoice_additional_abundance_options.min_abundance
+    		#end if	
+		#end if
+
+
 
 
         &&
@@ -62,7 +69,7 @@
 
 
         <conditional name="gchoice_additional_analysis_types">
-        	<param name="global_additional_analysis_types" type="select" label="Advanced parameters"  multiple="False" help="Select advanced choices ">
+        	<param name="global_additional_analysis_types" type="select" label="Advanced Model Formula Parameters"  multiple="False" help="Select advanced choices ">
         		<option value="0" selected='True'>No</option>
 				<option value="1">Yes</option>
         	</param>
@@ -94,6 +101,28 @@
                 </valid>
             </sanitizer>
         </param>
+
+
+
+        <conditional name="gchoice_additional_abundance_options">
+        	<param name="global_additional_abundance" type="select" label="Advanced Analysis Options"  multiple="False" help="Select Advanced Analysis Options">
+        		<option value="0" selected='True'>No</option>
+				<option value="1">Yes</option>
+        	</param>
+           	<when value="0">
+ 				 
+			</when>
+
+        	<when value="1">
+
+			        <param name="min_abundance" type="float"  value="0"  label=" The minimum abundance for each feature "/>
+
+			</when>
+    	</conditional>
+ 
+
+
+
 
 
     </inputs>
