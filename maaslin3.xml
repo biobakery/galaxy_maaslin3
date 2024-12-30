@@ -238,6 +238,11 @@ MaAsLin 3 is the next generation of MaAsLin (Microbiome Multivariable Associatio
 
 
 
+.. image:: ${static_path}/images/summary_plot.png
+    :height: 500        
+    :width: 600 
+
+
 **Inputs**
 ==========
 
