@@ -240,7 +240,7 @@ MaAsLin 3 is the next generation of MaAsLin (Microbiome Multivariable Associatio
 
 .. image:: ${static_path}/images/summary_plot.png
     :height: 500        
-    :width: 600 
+    :width: 800 
 
 
 **Inputs**
@@ -250,19 +250,25 @@ MaAsLin 3 is the next generation of MaAsLin (Microbiome Multivariable Associatio
 MaAslin requires two inputs which are described here:  Inputs_Description_ 
 
 
-* Taxonomy file: Possible features include taxonomy or genes. These can be relative abundances or counts.
+*Taxonomy file:* 
+================
+
+    Possible features include taxonomy or genes.
+
+    These can be relative abundances or counts.
 
     Sample for this file can be found in  MaAslin3_Sample_Taxonomy_ .
-    
-    Please upload with datatype of "maaslin3_taxonomy_input"
 
-* Metadata file: Formatted with variables as columns and samples as rows. Possible metadata include gender or age
+    Please upload with datatype of *"maaslin3_taxonomy_input"*
+
+*Metadata file:* 
+================
+
+    Formatted with variables as columns and samples as rows. Possible metadata include gender or age
 
     Sample for this file can be found in  MaAslin3_Sample_Metadata_ .
-     
-    Please upload with datatype of "maaslin3_metadata_input"
 
- 
+    Please upload with datatype of *"maaslin3_metadata_input"*
 
 
 **Outputs**
@@ -273,23 +279,22 @@ MaAslin requires two inputs which are described here:  Inputs_Description_
 
  ..  _MaAsLin3_Outputs_Description:  http://github.com/biobakery/maaslin3?tab=readme-ov-file#output-files
  ..  _the_manuscript: http://doi.org/10.1101/2024.12.13.628459
- ..  _MaAsLin3_Tutorial: http://github.com/biobakery/maaslin3
  ..  _MaAslin3_Sample_Taxonomy:  http://github.com/biobakery/galaxy_maaslin3/blob/main/sample_data/HMP2_taxonomy.tsv
  ..  _MaAslin3_Sample_Metadata:  http://github.com/biobakery/galaxy_maaslin3/blob/main/sample_data/HMP2_metadata.tsv
  ..  _Inputs_Description: http://github.com/biobakery/maaslin3?tab=readme-ov-file#input-data
- 
- 
+ ..   _User_Manual: http://github.com/biobakery/Maaslin3
+ ..   _Tutorial:  http://github.com/biobakery/biobakery/wiki/maaslin3
+ ..  _Forum:  http://forum.biobakery.org/c/Downstream-analysis-and-statistics/MaAsLin3
 
-
-
-**User Manual**
+**User Manual, Tutorial and Forum**
 ===================================
 
 
 You can find the following resources:
 
--  MaAsLin3_Tutorial_
- 
+-  User_Manual_
+-  Tutorial_
+-  Forum_
 
 
 If you use the MaAsLin 3 software, please cite the_manuscript_ :
