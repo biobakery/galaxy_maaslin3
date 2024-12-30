@@ -1,5 +1,7 @@
   <section name="MaAsLin3" id="maaslin3">
    <tool file="galaxy_maaslin3/maaslin3.xml" />
+  </section>
+    <section name="MaAsLin3_Lite-LEfSe Replacement" id="maaslin3_lite">
    <tool file="galaxy_maaslin3_lite/maaslin3_lite_A.xml" />
    <tool file="galaxy_maaslin3_lite/maaslin3_lite_B.xml" />
    <tool file="galaxy_maaslin3_lite/maaslin3_lite_C.xml" />
