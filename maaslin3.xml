@@ -5,10 +5,7 @@
 
 
     <command detect_errors="exit_code"><![CDATA[
- 
-
-
-        
+         
         rm -rf /tmp/tmp.maaslin3_output &&
         rm -f  /tmp/tmp.maaslin3_taxonomy.tsv &&
         rm -f /tmp/tmp.maaslin3_metadata.tsv &&
@@ -73,8 +70,45 @@
     		#end if	
 
 			#if  str($gchoice_additional_abundance_options.correction) != "BH":
-				--correction  $gchoice_additional_abundance_options.corection
+				--correction  $gchoice_additional_abundance_options.correction
     		#end if	
+
+			#if  str($gchoice_additional_abundance_options.standardize) != "TRUE":
+				--correction  $gchoice_additional_abundance_options.standardize
+    		#end if	
+
+			#if  str($gchoice_additional_abundance_options.median_comparison_abundance) != "TRUE":
+				--median_comparison_abundance  $gchoice_additional_abundance_options.median_comparison_abundance
+    		#end if	
+            
+			#if  str($gchoice_additional_abundance_options.median_comparison_prevalence) != "FALSE":
+				--median_comparison_prevalence  $gchoice_additional_abundance_options.median_comparison_prevalence
+    		#end if	
+
+ 			#if  float($gchoice_additional_abundance_options.median_comparison_abundance_threshold) > 0:
+				--median_comparison_abundance_threshold  $gchoice_additional_abundance_options.median_comparison_abundance_threshold
+    		#end if
+
+ 			#if  float($gchoice_additional_abundance_options.median_comparison_prevalence_threshold) > 0:
+				--median_comparison_prevalence_threshold  $gchoice_additional_abundance_options.median_comparison_prevalence_threshold
+    		#end if
+             
+			#if  str($gchoice_additional_abundance_options.subtract_median) != "FALSE":
+				--subtract_median  $gchoice_additional_abundance_options.subtract_median
+    		#end if	
+
+            #if  str($gchoice_additional_abundance_options.warn_prevalence) != "TRUE":
+				--warn_prevalence  $gchoice_additional_abundance_options.warn_prevalence
+    		#end if	
+
+            #if  str($gchoice_additional_abundance_options.augment) != "TRUE":
+				--augment  $gchoice_additional_abundance_options.augment
+    		#end if	
+
+            #if  str($gchoice_additional_abundance_options.evaluate_only) != "NULL":
+				--evaluate_only  $gchoice_additional_abundance_options.evaluate_only
+    		#end if	
+
 		#end if
 
 
@@ -165,7 +199,16 @@
                                     <option value="NONE">NONE</option>
                     </param>
                     <param name="correction" type="text"  value="BH"  label=" The correction to obtain FDR-corrected q-values from raw p-values. Any valid options for p.adjust can be used. "/>
-
+                    <param name="standardize" type="text"  value="TRUE"  label="Apply z-score so continuous metadata are on the same scale "/>
+                    <param name="median_comparison_abundance" type="text"  value="TRUE"  label="Test abundance coefficients against the median association "/>
+                    <param name="median_comparison_prevalence" type="text"  value="FALSE"  label="Test prevalence coefficients against the median association "/>
+			        <param name="median_comparison_abundance_threshold" type="float"  value="0"  label=" median_comparison_abundance_threshold "/>
+			        <param name="median_comparison_prevalence_threshold" type="float"  value="0"  label=" Radius within which the median adjustment gives a p-value of 1 "/>
+                    <param name="subtract_median" type="text"  value="FALSE"  label="Subtract the median from coefficients when doing median comparisons "/>
+                    <param name="warn_prevalence" type="text"  value="TRUE"  label="Check and warn if prevalence associations are likely due to compositionality"/>
+                    <param name="augment" type="text"  value="TRUE"  label="Add weighted extra 0s and 1s to avoid linear separability"/>
+                    <param name="evaluate_only" type="text"  value="NULL"  label="Whether to evaluate just the abundance or prevalence models"/>
+ 
 
 			</when>
     	</conditional>
