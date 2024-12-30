@@ -217,6 +217,7 @@
 
                     <param name="correction" type="select" value="BH" format="text" >
                             <label>correction: The correction to obtain FDR-corrected q-values from raw p-values.  </label>
+                                    <option value="BH">holm</option>
                                     <option value="holm">holm</option>
                                     <option value="hochberg">hochberg</option>
                                     <option value="hommel">hommel</option>
@@ -224,19 +225,59 @@
                                     <option value="BY">BY</option>
                     </param>
 
-                    <param name="standardize" type="text"  value="TRUE"  label="standardize: Apply z-score so continuous metadata are on the same scale "/>
-                    <param name="median_comparison_abundance" type="text"  value="TRUE"  label="median_comparison_abundance: Test abundance coefficients against the median association "/>
-                    <param name="median_comparison_prevalence" type="text"  value="FALSE"  label="Test prevalence coefficients against the median association "/>
+                    <param name="standardize" type="select"  value="TRUE" format="text" >
+                        <label>standardize: Apply z-score so continuous metadata are on the same scale  </label>
+                            <option value="TRUE">TRUE</option>
+                            <option value="FALSE">FALSE</option>
+                    </param>
+
+                    <param name="median_comparison_abundance" type="select"  value="TRUE" format="text" >
+                        <label>median_comparison_abundance: Test abundance coefficients against the median association   </label>
+                            <option value="TRUE">TRUE</option>
+                            <option value="FALSE">FALSE</option>
+                    </param>
+
+                    <param name="median_comparison_prevalence" type="select"  value="FALSE" format="text" >
+                        <label>median_comparison_prevalence: Test prevalence coefficients against the median association   </label>
+                            <option value="FALSE">FALSE</option>
+                            <option value="TRUE">TRUE</option>
+                    </param>
+
+                  
 			        <param name="median_comparison_abundance_threshold" type="float"  value="0"  label=" median_comparison_abundance_threshold: median_comparison_abundance_threshold "/>
 			        <param name="median_comparison_prevalence_threshold" type="float"  value="0"  label=" Radius within which the median adjustment gives a p-value of 1 "/>
-                    <param name="subtract_median" type="text"  value="FALSE"  label="subtract_median: Subtract the median from coefficients when doing median comparisons "/>
-                    <param name="warn_prevalence" type="text"  value="TRUE"  label="warn_prevalence: Check and warn if prevalence associations are likely due to compositionality"/>
-                    <param name="augment" type="text"  value="TRUE"  label="augment: Add weighted extra 0s and 1s to avoid linear separability"/>
+
+                    <param name="subtract_median" type="select"  value="FALSE" format="text" >
+                        <label>subtract_median: ubtract_median: Subtract the median from coefficients when doing median comparisons   </label>
+                            <option value="FALSE">FALSE</option>
+                            <option value="TRUE">TRUE</option>
+                    </param>
+
+
+                    <param name="warn_prevalence" type="select"  value="TRUE" format="text" >
+                        <label>warn_prevalence: warn_prevalence: Check and warn if prevalence associations are likely due to compositionality   </label>
+                            <option value="TRUE">TRUE</option>
+                            <option value="FALSE">FALSE</option>
+                    </param>
+
+
+                    <param name="augment" type="select" value="TRUE" format="text" >
+                        <label>augment: augment: Add weighted extra 0s and 1s to avoid linear separability </label>
+                            <option value="TRUE">TRUE</option>
+                            <option value="FALSE">FALSE</option>
+                    </param>
+
                     <param name="evaluate_only" type="text"  value="NULL"  label="evaluate_only: Whether to evaluate just the abundance or prevalence models"/>
  			        <param name="summary_plot_first_n" type="integer" size="4"  value="25"  label="summary_plot_first_n: In summary plot, plot top N features with significant associations "/>
  			        <param name="coef_plot_vars" type="text"  value="NA"  label="coef_plot_vars: The variables to use in the coefficient plot section of the summary plot provided as a comma-separated string. Continuous variables should match the metadata column name, and categorical variables should be of the form: [metadata] [level]"/>
  			        <param name="heatmap_vars" type="text"  value="NA"  label="heatmap_vars: The variables to use in the coefficient plot section of the summary plot provided as a comma-separated string. Continuous variables should match the metadata column name, and categorical variables should be of the form: [metadata] [level]"/>
- 			        <param name="summary_plot_balanced" type="text"  value="FALSE"  label="summary_plot_balanced:  If coef_plot_vars is selected this will select balanced top features "/>
+ 			       
+                   <param name="summary_plot_balanced" type="select"  value="FALSE" format="text" >
+                        <label>summary_plot_balanced:  If coef_plot_vars is selected this will select balanced top features   </label>
+                            <option value="FALSE">FALSE</option>
+                            <option value="TRUE">TRUE</option>
+                    </param>
+                    <param name="summary_plot_balanced" type="text"  value="FALSE"  label="summary_plot_balanced:  If coef_plot_vars is selected this will select balanced top features "/>
 
  
 
