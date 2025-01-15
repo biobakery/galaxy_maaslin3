@@ -17,11 +17,17 @@
         /tmp/tmp.maaslin3_taxonomy.tsv
         /tmp/tmp.maaslin3_metadata.tsv
         /tmp/tmp.maaslin3_output
-        --formula=$formula1
-        --reference=$reference1
+        
+        #if $str($gchoice_formula.glocal_choice_formula)  == "1":
+            --formula=$gchoice_formula.formula1
+		#end if
 
         #if $str($gchoice_additional_analysis_types.global_additional_analysis_types)  == "1":
-			#if $str($gchoice_additional_analysis_types.random_effects)  != "None":
+			#if $str($gchoice_additional_analysis_types.fixed_effects)  != "None":
+                --fixed_effects $gchoice_additional_analysis_types.fixed_effects
+			#end if	
+
+            #if $str($gchoice_additional_analysis_types.random_effects)  != "None":
                 --random_effects $gchoice_additional_analysis_types.random_effects
 			#end if	
 
@@ -32,8 +38,14 @@
 			#if $str($gchoice_additional_analysis_types.ordered_effects)  != "None":
                 --ordered_effects $gchoice_additional_analysis_types.ordered_effects
 			#end if	
- 
- 
+		#end if
+
+        --reference=$reference1
+
+        #if $str($gchoice_absolute_abundance.global_absolute_abundance)  == "1":
+			#if $str($gchoice_absolute_abundance.unscaled_abundance)  != "None":
+                --unscaled_abundance $gchoice_absolute_abundance.unscaled_abundance
+			#end if	
 		#end if
 
         #if $str($gchoice_additional_abundance_options.global_additional_abundance)  == "1":
@@ -128,6 +140,20 @@
 
 		#end if
 
+        #if $str($gchoice_feature_specific_covariate.glocal_feature_specific_covariate)  == "1":
+			#if $str($gchoice_feature_specific_covariate.feature_specific_covariate)  != "None":
+                --feature_specific_covariate $gchoice_feature_specific_covariate.feature_specific_covariate
+			#end if	
+            
+            #if $str($gchoice_feature_specific_covariate.feature_specific_covariate_name)  != "None":
+                --feature_specific_covariate_name $gchoice_feature_specific_covariate.feature_specific_covariate_name
+			#end if	
+
+            #if $str($gchoice_feature_specific_covariate.feature_specific_covariate_record)  != "FALSE":
+                --feature_specific_covariate_record $gchoice_feature_specific_covariate.feature_specific_covariate_record
+			#end if	
+		#end if
+
 
         &&
         cp /tmp/tmp.maaslin3_output/maaslin3.log $output0 &&
@@ -145,23 +171,25 @@
         <param type="data" name="taxonomy"  label="Input Taxonomy:  Use DataType 'maaslin3_taxonomy_input' when you upload this file" format="maaslin3_taxonomy_input"  />
         <param type="data" name="metadata"  label="Input Metadata : Use DataType 'maaslin3_metadata_input' when you upload" format="maaslin3_metadata_input"  />
 
-        <param name="formula1" type="text" label="formula: For sample use:  '~ diagnosis + dysbiosis_state + antibiotics + age + reads'" value="'~ diagnosis + dysbiosis_state + antibiotics + age + reads'">
-            <sanitizer  >
-                <valid initial="string.printable">
-                </valid>
-            </sanitizer>
-        </param>
+        <conditional name="gchoice_formula">
+            <param name="glocal_choice_formula" type="select" label="Use model from formula. For Sample enter the following formula: '~ diagnosis + dysbiosis_score + antibiotics + age + reads + (1|participant_id)'"  multiple="False" help="Specify a model by typing a formula">
+                <option value="1" selected='True'>Yes</option>
+				<option value="0">No</option>
+        	</param>
+           	<when value="0">
 
+            </when>
 
-        <param name="reference1" type="text" label="reference: For sample use:  'diagnosis,nonIBD;dysbiosis_state,none;antibiotics,No'" value="'diagnosis,nonIBD;dysbiosis_state,none;antibiotics,No'">
-            <sanitizer >
-                <valid initial="string.printable">
-                </valid>
-            </sanitizer>
-        </param>
+        	<when value="1">
+                <param name="formula1" type="text" label="formula: For sample use:  '~ diagnosis + dysbiosis_state + antibiotics + age + reads'" value="'~ diagnosis + dysbiosis_state + antibiotics + age + reads'">
+                    <sanitizer  >
+                        <valid initial="string.printable">
+                        </valid>
+                    </sanitizer>
+                </param>
 
-
-
+			</when>
+    	</conditional>
 
         <conditional name="gchoice_additional_analysis_types">
         	<param name="global_additional_analysis_types" type="select" label="Advanced Model Formula Parameters"  multiple="False" help="Select advanced choices ">
@@ -174,15 +202,35 @@
 
         	<when value="1">
 				 
+                <param name="fixed_effects" label="fixed_effects: The fixed effects for the model, comma-delimited for multiple effects [ Default: none ]"  value="None" type="text" format="text"/>
 				<param name="random_effects" label="random_effects: The random effects for the model, comma-delimited for multiple effects [ Default: none ]"  value="None" type="text" format="text"/>
 				<param name="group_effects" label="group_effects: The group effects for the model, comma-delimited for multiple effects[ Default: none ] "  value="None" type="text" format="text"/>
 				<param name="ordered_effects" label="ordered_effects: The ordered effects for the model, comma-delimited for multiple effects [ Default: none ] "  value="None" type="text" format="text"/>
 
 			</when>
     	</conditional>
- 
-      
 
+        <param name="reference1" type="text" label="reference: For sample use:  'diagnosis,nonIBD;dysbiosis_state,none;antibiotics,No'" value="'diagnosis,nonIBD;dysbiosis_state,none;antibiotics,No'">
+            <sanitizer >
+                <valid initial="string.printable">
+                </valid>
+            </sanitizer>
+        </param>
+
+        <conditional name="gchoice_absolute_abundance">
+            <param name="global_absolute_abundance" type="select" label="Use absolute abundance data"  multiple="False" help="Include spike-in or total abundance data">
+        		<option value="0" selected='True'>No</option>
+				<option value="1">Yes</option>
+        	</param>
+           	<when value="0">
+
+            </when>
+
+        	<when value="1">
+                <param type="data" name="unscaled_abundance"  label="Input absolute abundance : Use DataType 'maaslin3_unscaled_abundance' when you upload" value="None"  format="maaslin3_unscaled_abundance"  />
+
+			</when>
+    	</conditional>
 
         <conditional name="gchoice_additional_abundance_options">
         	<param name="global_additional_abundance" type="select" label="Advanced Analysis Options"  multiple="False" help="Select Advanced Analysis Options">
@@ -217,7 +265,7 @@
 
                     <param name="correction" type="select" value="BH" format="text" >
                             <label>correction: The correction to obtain FDR-corrected q-values from raw p-values.  </label>
-                                    <option value="BH">holm</option>
+                                    <option value="BH">BH</option>
                                     <option value="holm">holm</option>
                                     <option value="hochberg">hochberg</option>
                                     <option value="hommel">hommel</option>
@@ -277,18 +325,33 @@
                             <option value="FALSE">FALSE</option>
                             <option value="TRUE">TRUE</option>
                     </param>
-                    <param name="summary_plot_balanced" type="text"  value="FALSE"  label="summary_plot_balanced:  If coef_plot_vars is selected this will select balanced top features "/>
 
  
 
 			</when>
     	</conditional>
+
+        <conditional name="gchoice_feature_specific_covariate">
+            <param name="glocal_feature_specific_covariate" type="select" label="Use feature specific covariates"  multiple="False" help="Control for feature-specific covariates like DNA during transcriptomics">
+        		<option value="0" selected='True'>No</option>
+				<option value="1">Yes</option>
+        	</param>
+           	<when value="0">
+
+            </when>
+
+        	<when value="1">
+                <param type="data" name="feature_specific_covariate"  label="Input feature specific covariate table : Use DataType 'maaslin3_feature_specific_covariate' when you upload" value="None"  format="maaslin3_feature_specific_covariate"  />
+                <param name="feature_specific_covariate_name" label="feature_specific_covariate_name: The name for the feature-specific covariates when fitting the models [ Default: none ]"  value="None" type="text" format="text"/>
+                <param name="feature_specific_covariate_record" type="select"  value="FALSE" format="text" >
+                    <label>feature_specific_covariate_record: Whether to keep the feature-specific covariates in the outputs when calculating p-values, writing results, and displaying plots  </label>
+                        <option value="TRUE">TRUE</option>
+                        <option value="FALSE">FALSE</option>
+                </param>
+
+			</when>
+    	</conditional>
  
-
-
-
-
-
     </inputs>
     <outputs>
         <data name="output0"  format="txt" label="maaslin3 log" />
@@ -340,6 +403,22 @@ MaAslin requires two inputs which are described here:  Inputs_Description_
     Sample for this file can be found in  MaAslin3_Sample_Metadata_ .
 
     Please upload with datatype of *"maaslin3_metadata_input"*
+
+*Absolute abundance file:* 
+==========================
+
+    A single column with the column name the same as one of the features when using a spike-in or 'total' when using total abundance scaling.
+
+    Row names should be the same as for the taxonomy and metadata files.
+
+    Please upload with datatype of *"maaslin3_unscaled_abundance"*
+
+*Feature specific covariates file:* 
+===================================
+
+    Formatted with features as columns and samples as rows. The row names and column names should be the same as those of the taxonomy input.
+
+    Please upload with datatype of *"maaslin3_feature_specific_covariate"*
 
 
 **Outputs**
