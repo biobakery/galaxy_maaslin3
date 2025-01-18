@@ -172,7 +172,7 @@
         <param type="data" name="metadata"  label="Input Metadata : Use DataType 'maaslin3_metadata_input' when you upload" format="maaslin3_metadata_input"  />
 
         <conditional name="gchoice_formula">
-            <param name="glocal_choice_formula" type="select" label="Use model from formula. For Sample enter the following formula: '~ diagnosis + dysbiosis_score + antibiotics + age + reads + (1|participant_id)'"  multiple="False" help="Specify a model by typing a formula">
+            <param name="glocal_choice_formula" type="select" label="Use model from formula. For Sample enter the following formula: '~ diagnosis + dysbiosis_score + antibiotics + age + reads'"  multiple="False" help="Specify a model by typing a formula">
                 <option value="1" selected='True'>Yes</option>
 				<option value="0">No</option>
         	</param>
@@ -413,6 +413,12 @@ MaAslin requires two inputs which are described here:  Inputs_Description_
 
     Please upload with datatype of *"maaslin3_unscaled_abundance"*
 
+    Please see detailed documentation on how to use this file in doc_unscaled_abundance_ 
+    
+    Sample for this file can be found in  MaAslin3_Sample_Specific_Unscaled_Abundance_ .
+
+
+
 *Feature specific covariates file:* 
 ===================================
 
@@ -420,6 +426,9 @@ MaAslin requires two inputs which are described here:  Inputs_Description_
 
     Please upload with datatype of *"maaslin3_feature_specific_covariate"*
 
+    Please see detailed documentation on how to use this file in doc_specific_covariate_ 
+
+    Sample for this file can be found in  MaAslin3_Sample_Specific_Covariate_ .
 
 **Outputs**
 ===========
@@ -431,10 +440,14 @@ MaAslin requires two inputs which are described here:  Inputs_Description_
  ..  _the_manuscript: http://doi.org/10.1101/2024.12.13.628459
  ..  _MaAslin3_Sample_Taxonomy:  http://github.com/biobakery/galaxy_maaslin3/blob/main/sample_data/HMP2_taxonomy.tsv
  ..  _MaAslin3_Sample_Metadata:  http://github.com/biobakery/galaxy_maaslin3/blob/main/sample_data/HMP2_metadata.tsv
+ ..  _MaAslin3_Sample_Specific_Covariate:  http://github.com/biobakery/galaxy_maaslin3/blob/main/sample_data/maaslin3_feature_specific_covariate.tsv
+ ..  _MaAslin3_Sample_Specific_Unscaled_Abundance:  http://github.com/biobakery/galaxy_maaslin3/blob/main/sample_data/maaslin3_unscaled_abundance.tsv
  ..  _Inputs_Description: http://github.com/biobakery/maaslin3?tab=readme-ov-file#input-data
  ..   _User_Manual: http://github.com/biobakery/Maaslin3
  ..   _Tutorial:  http://github.com/biobakery/biobakery/wiki/maaslin3
  ..  _Forum:  http://forum.biobakery.org/c/Downstream-analysis-and-statistics/MaAsLin3
+ ..  _doc_unscaled_abundance:  http://github.com/biobakery/biobakery/wiki/MaAsLin3/#spike-in
+ ..  _doc_specific_covariate: http://github.com/biobakery/biobakery/wiki/MTX-model-3#312-examples-of-input-files
 
 **User Manual, Tutorial and Forum**
 ===================================
