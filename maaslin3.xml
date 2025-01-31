@@ -6,17 +6,17 @@
 
     <command detect_errors="exit_code"><![CDATA[
          
-        rm -rf /tmp/tmp.maaslin3_output &&
-        rm -f  /tmp/tmp.maaslin3_taxonomy.tsv &&
-        rm -f /tmp/tmp.maaslin3_metadata.tsv &&
-        mkdir /tmp/tmp.maaslin3_output &&
-        rm -f /tmp/tmp.maaslin3_Results.zip &&
-        cp $taxonomy /tmp/tmp.maaslin3_taxonomy.tsv &&
-        cp $metadata /tmp/tmp.maaslin3_metadata.tsv &&
+        rm -rf /tmp/tmp.maaslin3_output_$__user_id__ &&
+        rm -f  /tmp/tmp.maaslin3_{$__user_id__}_taxonomy.tsv &&
+        rm -f /tmp/tmp.maaslin3_{$__user_id__}_metadata.tsv &&
+        mkdir /tmp/tmp.maaslin3_output_$__user_id__ &&
+        rm -f /tmp/tmp.maaslin3_{$__user_id__}_Results.zip &&
+        cp $taxonomy /tmp/tmp.maaslin3_{$__user_id__}_taxonomy.tsv &&
+        cp $metadata /tmp/tmp.maaslin3_{$__user_id__}_metadata.tsv &&
         Rscript '/export/galaxy-central/tools/maaslin3/R/maaslin3.R'
-        /tmp/tmp.maaslin3_taxonomy.tsv
-        /tmp/tmp.maaslin3_metadata.tsv
-        /tmp/tmp.maaslin3_output
+        /tmp/tmp.maaslin3_{$__user_id__}_taxonomy.tsv
+        /tmp/tmp.maaslin3_{$__user_id__}_metadata.tsv
+        /tmp/tmp.maaslin3_output_$__user_id__
         
         #if $str($gchoice_formula.glocal_choice_formula)  == "1":
             --formula=$gchoice_formula.formula1
@@ -156,16 +156,16 @@
 
 
         &&
-        cp /tmp/tmp.maaslin3_output/maaslin3.log $output0 &&
-        cp /tmp/tmp.maaslin3_output/all_results.tsv  $output1 &&
-        cp /tmp/tmp.maaslin3_output/significant_results.tsv  $output2 &&
-        cp /tmp/tmp.maaslin3_output/figures/summary_plot.pdf $output3 &&
-        zip -r  /tmp/tmp.maaslin3_Results.zip  /tmp/tmp.maaslin3_output &&
-        cp /tmp/tmp.maaslin3_Results.zip $output4 &&
-        rm -rf /tmp/tmp.maaslin3_output &&
-        rm -f  /tmp/tmp.maaslin3_taxonomy.tsv &&
-        rm -f /tmp/tmp.maaslin3_metadata.tsv &&
-        rm -f /tmp/tmp.maaslin3_Results.zip
+        cp /tmp/tmp.maaslin3_output_$__user_id__/maaslin3.log $output0 &&
+        cp /tmp/tmp.maaslin3_output_$__user_id__/all_results.tsv  $output1 &&
+        cp /tmp/tmp.maaslin3_output_$__user_id__/significant_results.tsv  $output2 &&
+        cp /tmp/tmp.maaslin3_output_$__user_id__/figures/summary_plot.pdf $output3 &&
+        zip -r  /tmp/tmp.maaslin3_{$__user_id__}_Results.zip  /tmp/tmp.maaslin3_output_$__user_id__ &&
+        cp /tmp/tmp.maaslin3_{$__user_id__}_Results.zip $output4 &&
+        rm -rf /tmp/tmp.maaslin3_output_$__user_id__ &&
+        rm -f  /tmp/tmp.maaslin3_{$__user_id__}_taxonomy.tsv &&
+        rm -f /tmp/tmp.maaslin3_{$__user_id__}_metadata.tsv &&
+        rm -f /tmp/tmp.maaslin3_{$__user_id__}_Results.zip
             ]]></command>
     <inputs>
         <param type="data" name="taxonomy"  label="Input Taxonomy:  Use DataType 'maaslin3_taxonomy_input' when you upload this file" format="maaslin3_taxonomy_input"  />
@@ -372,7 +372,7 @@ MaAsLin 3 is the next generation of MaAsLin (Microbiome Multivariable Associatio
 
 
 
-.. image:: ${static_path}/images/summary_plot1.png
+.. image:: http://github.com/biobakery/galaxy_maaslin3/blob/main/figures/summary_plot1.png?raw=true
     :height: 500        
     :width: 800 
 
