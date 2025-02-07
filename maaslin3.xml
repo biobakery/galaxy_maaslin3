@@ -34,10 +34,6 @@
 			#if $str($gchoice_additional_analysis_types.group_effects)  != "None":
                 --group_effects $gchoice_additional_analysis_types.group_effects
 			#end if	
-
-			#if $str($gchoice_additional_analysis_types.ordered_effects)  != "None":
-                --ordered_effects $gchoice_additional_analysis_types.ordered_effects
-			#end if	
 		#end if
 
         --reference=$reference1
@@ -140,20 +136,6 @@
 
 		#end if
 
-        #if $str($gchoice_feature_specific_covariate.glocal_feature_specific_covariate)  == "1":
-			#if $str($gchoice_feature_specific_covariate.feature_specific_covariate)  != "None":
-                --feature_specific_covariate $gchoice_feature_specific_covariate.feature_specific_covariate
-			#end if	
-            
-            #if $str($gchoice_feature_specific_covariate.feature_specific_covariate_name)  != "None":
-                --feature_specific_covariate_name $gchoice_feature_specific_covariate.feature_specific_covariate_name
-			#end if	
-
-            #if $str($gchoice_feature_specific_covariate.feature_specific_covariate_record)  != "FALSE":
-                --feature_specific_covariate_record $gchoice_feature_specific_covariate.feature_specific_covariate_record
-			#end if	
-		#end if
-
 
         &&
         cp /tmp/tmp.maaslin3_output_$__user_id__/maaslin3.log $output0 &&
@@ -205,7 +187,6 @@
                 <param name="fixed_effects" label="fixed_effects: The fixed effects for the model, comma-delimited for multiple effects [ Default: none ]"  value="None" type="text" format="text"/>
 				<param name="random_effects" label="random_effects: The random effects for the model, comma-delimited for multiple effects [ Default: none ]"  value="None" type="text" format="text"/>
 				<param name="group_effects" label="group_effects: The group effects for the model, comma-delimited for multiple effects[ Default: none ] "  value="None" type="text" format="text"/>
-				<param name="ordered_effects" label="ordered_effects: The ordered effects for the model, comma-delimited for multiple effects [ Default: none ] "  value="None" type="text" format="text"/>
 
 			</when>
     	</conditional>
@@ -331,27 +312,6 @@
 			</when>
     	</conditional>
 
-        <conditional name="gchoice_feature_specific_covariate">
-            <param name="glocal_feature_specific_covariate" type="select" label="Use feature specific covariates"  multiple="False" help="Control for feature-specific covariates like DNA during transcriptomics">
-        		<option value="0" selected='True'>No</option>
-				<option value="1">Yes</option>
-        	</param>
-           	<when value="0">
-
-            </when>
-
-        	<when value="1">
-                <param type="data" name="feature_specific_covariate"  label="Input feature specific covariate table : Use DataType 'maaslin3_feature_specific_covariate' when you upload" value="None"  format="maaslin3_feature_specific_covariate"  />
-                <param name="feature_specific_covariate_name" label="feature_specific_covariate_name: The name for the feature-specific covariates when fitting the models [ Default: none ]"  value="None" type="text" format="text"/>
-                <param name="feature_specific_covariate_record" type="select"  value="FALSE" format="text" >
-                    <label>feature_specific_covariate_record: Whether to keep the feature-specific covariates in the outputs when calculating p-values, writing results, and displaying plots  </label>
-                        <option value="TRUE">TRUE</option>
-                        <option value="FALSE">FALSE</option>
-                </param>
-
-			</when>
-    	</conditional>
- 
     </inputs>
     <outputs>
         <data name="output0"  format="txt" label="maaslin3 log" />
@@ -419,17 +379,6 @@ MaAslin requires two inputs which are described here:  Inputs_Description_
 
 
 
-*Feature specific covariates file:* 
-===================================
-
-    Formatted with features as columns and samples as rows. The row names and column names should be the same as those of the taxonomy input.
-
-    Please upload with datatype of *"maaslin3_feature_specific_covariate"*
-
-    Please see detailed documentation on how to use this file in doc_specific_covariate_ 
-
-    Sample for this file can be found in  MaAslin3_Sample_Specific_Covariate_ .
-
 **Outputs**
 ===========
 
@@ -440,14 +389,12 @@ MaAslin requires two inputs which are described here:  Inputs_Description_
  ..  _the_manuscript: http://doi.org/10.1101/2024.12.13.628459
  ..  _MaAslin3_Sample_Taxonomy:  http://github.com/biobakery/galaxy_maaslin3/blob/main/sample_data/HMP2_taxonomy.tsv
  ..  _MaAslin3_Sample_Metadata:  http://github.com/biobakery/galaxy_maaslin3/blob/main/sample_data/HMP2_metadata.tsv
- ..  _MaAslin3_Sample_Specific_Covariate:  http://github.com/biobakery/galaxy_maaslin3/blob/main/sample_data/maaslin3_feature_specific_covariate.tsv
  ..  _MaAslin3_Sample_Specific_Unscaled_Abundance:  http://github.com/biobakery/galaxy_maaslin3/blob/main/sample_data/maaslin3_unscaled_abundance.tsv
  ..  _Inputs_Description: http://github.com/biobakery/maaslin3?tab=readme-ov-file#input-data
  ..   _User_Manual: http://github.com/biobakery/Maaslin3
  ..   _Tutorial:  http://github.com/biobakery/biobakery/wiki/maaslin3
  ..  _Forum:  http://forum.biobakery.org/c/Downstream-analysis-and-statistics/MaAsLin3
  ..  _doc_unscaled_abundance:  http://github.com/biobakery/biobakery/wiki/MaAsLin3/#spike-in
- ..  _doc_specific_covariate: http://github.com/biobakery/biobakery/wiki/MTX-model-3#312-examples-of-input-files
 
 **User Manual, Tutorial and Forum**
 ===================================
